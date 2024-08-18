@@ -59,13 +59,13 @@ public class ProyekController {
 
     // Delete a proyek
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProyek(@PathVariable("id") int id) {
+    public ResponseEntity<String> deleteProyek(@PathVariable("id") int id) {
         Optional<Proyek> existingProyek = proyekService.getProyekById(id);
         if (existingProyek.isPresent()) {
             proyekService.deleteProyek(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("Proyek dengan ID " + id + " berhasil dihapus.", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Proyek with ID " + id + " not found.", HttpStatus.NOT_FOUND);
         }
     }
 }

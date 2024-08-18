@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/proyek-lokasi")
+@CrossOrigin(origins = "http://localhost")
 public class ProyekLokasiController {
 
     @Autowired
@@ -62,6 +63,17 @@ public class ProyekLokasiController {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Get locations by project ID
+    @GetMapping("/proyek/{proyekId}/lokasi")
+    public ResponseEntity<List<ProyekLokasi>> getLokasiByProyekId(@PathVariable int proyekId) {
+        List<ProyekLokasi> lokasiList = proyekLokasiService.getLokasiByProyekId(proyekId);
+        if (lokasiList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(lokasiList);
         }
     }
 }
