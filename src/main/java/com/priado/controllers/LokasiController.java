@@ -57,12 +57,12 @@ public class LokasiController {
 
     // Delete a lokasi
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLokasi(@PathVariable("id") int id) {
+    public ResponseEntity<String> deleteLokasi(@PathVariable("id") int id) {
         if (lokasiService.getLokasiById(id).isPresent()) {
             lokasiService.deleteLokasi(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("Berhasil hapus data lokasi", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Data lokasi tidak ditemukan", HttpStatus.NOT_FOUND);
         }
     }
 }
