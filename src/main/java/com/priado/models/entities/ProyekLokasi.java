@@ -7,6 +7,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.FetchType; // Import ini jika belum ada
 
 @Entity
 @Table(name = "proyek_lokasi")
@@ -16,12 +17,12 @@ public class ProyekLokasi implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER) // Menggunakan FetchType.EAGER
     @JoinColumn(name = "proyek_id", referencedColumnName = "id", nullable = false)
     private Proyek proyek;
 
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER) // Menggunakan FetchType.EAGER
     @JoinColumn(name = "lokasi_id", referencedColumnName = "id", nullable = false)
     private Lokasi lokasi;
 
